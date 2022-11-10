@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const showsRouter = Router();
-const { Show } = require("../models");
+const { Show, Watch_Info } = require("../models");
 
 // GET all shows
 showsRouter.get("/", async (req, res) => {
@@ -21,6 +21,23 @@ showsRouter.get("/genres/:genre", async (req, res) => {
 });
 
 // PUT update rating of a show that has been watched
+showsRouter.patch("/:id/rating", async (req, res) => {
+  const show = await Show.findByPk(req.params.id, {
+    include: Watch_Info,
+  });
+  const { rating } = req.body;
+  // watch info and only save the ratings into an array
+  const watchInfo = show.Watch_Infos.map((values) => values.rating);
+  watchInfo.push(rating);
+
+  const average = (
+    watchInfo.reduce((a, b) => a + b, 0) / watchInfo.length
+  ).toFixed(1);
+
+  await show.update({ rating: average });
+  // console.log(average);
+  res.sendStatus(200);
+});
 
 // PUT update the status of a show
 showsRouter.put("/:id/updates", async (req, res) => {

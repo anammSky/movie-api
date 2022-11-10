@@ -8,10 +8,10 @@ Show.belongsToMany(User, { through: "Watch_Info" });
 User.belongsToMany(Show, { through: "Watch_Info" });
 
 // The Super Many-to-Many relationship
-// User.hasMany(Watch_Info);
-// Watch_Info.belongsTo(User);
+User.hasMany(Watch_Info);
+Watch_Info.belongsTo(User);
 
-// Show.hasMany(Watch_Info);
-// Watch_Info.belongsTo(Show);
+Show.hasMany(Watch_Info);
+Watch_Info.belongsTo(Show);
 
 module.exports = { Show, User, Watch_Info };
