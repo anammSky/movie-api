@@ -2,9 +2,11 @@ const express = require("express");
 const app = express();
 // const db = require("./db/db");
 const seed = require("./db/seed");
+const { userRouter } = require("./routes");
 
 app.use(express.json());
 
+app.use("/users", userRouter);
 // (async () => {
 //   try {
 //     await seed();
