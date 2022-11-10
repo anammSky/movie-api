@@ -5,19 +5,20 @@ const seed = require("./db/seed");
 
 app.use(express.json());
 
-(async () => {
-  try {
-    await seed();
-  } catch (error) {
-    throw new Error("Database not seeded");
-  }
-})();
+// (async () => {
+//   try {
+//     await seed();
+//   } catch (error) {
+//     throw new Error("Database not seeded");
+//   }
+// })();
 
 // app.get("/sync", async (req, res) => {
 //   res.sendStatus(200);
 // });
 
-app.listen(5001, () => {
+app.listen(5001, async () => {
+  await seed();
   console.log("listening on port 5001");
 });
 
