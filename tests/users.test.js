@@ -25,7 +25,7 @@ describe("GET /users", () => {
     });
   });
 
-  test("'/1/user' should respond with user 2", async () => {
+  test("'/2' should respond with user 2", async () => {
     const res = await request(app).get("/users/2");
     expect(res.body).toMatchObject({
       id: 2,

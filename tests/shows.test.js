@@ -25,23 +25,23 @@ describe("GET /shows", () => {
     });
   });
 
-  //   test("'/1/user' should respond with user 2", async () => {
-  //     const res = await request(app).get("/users/2");
-  //     expect(res.body).toMatchObject({
-  //       id: 2,
-  //       username: "someone@gmail.com",
-  //       password: "asdfsAS2@1",
-  //     });
+  test("'/shows/2 should respond with show 2", async () => {
+    const res = await request(app).get("/shows/2");
+    expect(res.body).toMatchObject({
+      id: 2,
+      title: "X-Files",
+      genre: "Sitcom",
+    });
+  });
+
+  //   test("'/genres/Comedy should add Demon Slayer to users watched shows", async () => {
+  //     const res = await request(app).get("/shows/genres/Comedy");
+  //     const genres = res.body.shows.map((showObj) => showObj.genre);
+  //     expect(genres).toContain("Comedy");
   //   });
+
   //   test("'/1/shows' should respond with shows watched by user 1", async () => {
   //     const res = await request(app).get("/users/1/shows");
   //     expect(res.body).toHaveProperty("shows");
-  //   });
-
-  //   test("'/users/1/shows/9 should add Demon Slayer to users watched shows", async () => {
-  //     await request(app).put("/users/1/shows/9");
-  //     const res = await request(app).get("/users/1/shows");
-  //     const showsTitle = res.body.shows.map((showObj) => showObj.title);
-  //     expect(showsTitle).toContain("Demon Slayer");
   //   });
 });
