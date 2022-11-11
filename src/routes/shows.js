@@ -1,4 +1,6 @@
 const { Router } = require("express");
+const { body, validationResult } = require("express-validator");
+const validateRating = require("../middleware/validateRating");
 const showsRouter = Router();
 const { Show, Watch_Info } = require("../models");
 
@@ -21,7 +23,7 @@ showsRouter.get("/genres/:genre", async (req, res) => {
 });
 
 // PUT update rating of a show that has been watched
-showsRouter.patch("/:id/rating", async (req, res) => {
+showsRouter.put("/:id/rating", validateRating, async (req, res) => {
   const show = await Show.findByPk(req.params.id, {
     include: Watch_Info,
   });
@@ -35,7 +37,7 @@ showsRouter.patch("/:id/rating", async (req, res) => {
   ).toFixed(1);
 
   await show.update({ rating: average });
-  // console.log(average);
+
   res.sendStatus(200);
 });
 
