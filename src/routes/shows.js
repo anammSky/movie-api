@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { body, validationResult } = require("express-validator");
-const validateRating = require("../middleware/validateRating");
+const { validateUpdateStatus, validateRating } = require("../middleware");
 const showsRouter = Router();
 const { Show, Watch_Info } = require("../models");
 
@@ -42,7 +42,7 @@ showsRouter.put("/:id/rating", validateRating, async (req, res) => {
 });
 
 // PUT update the status of a show
-showsRouter.put("/:id/updates", async (req, res) => {
+showsRouter.put("/:id/updates", validateUpdateStatus, async (req, res) => {
   const show = await Show.findByPk(req.params.id);
   const { status } = req.body;
   await show.update({ status: status });
