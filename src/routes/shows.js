@@ -1,5 +1,4 @@
 const { Router } = require("express");
-const { body, validationResult } = require("express-validator");
 const { validateUpdateStatus, validateRating } = require("../middleware");
 const showsRouter = Router();
 const { Show, Watch_Info } = require("../models");

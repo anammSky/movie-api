@@ -2,6 +2,10 @@ const { Router } = require("express");
 const userRouter = Router();
 const { User } = require("../models");
 
+userRouter.get("/health", (req, res) => {
+  res.status(200).send("User router is healthy");
+});
+
 // GET all users
 userRouter.get("/", async (req, res) => {
   const allUsers = await User.findAll();
@@ -26,10 +30,6 @@ userRouter.put("/:id/shows/:showId", async (req, res) => {
   const user = await User.findByPk(req.params.id);
   await user.addShow(req.params.showId, { through: { rating: 0 } });
   res.sendStatus(200);
-});
-
-userRouter.get("/health", (req, res) => {
-  res.status(200).send("User router is healthy");
 });
 
 module.exports = userRouter;
